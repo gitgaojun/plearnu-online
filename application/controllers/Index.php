@@ -33,7 +33,28 @@ class IndexController extends Controller_Abstract
 
     public function getAllAction()
     {
+        $this->__init();
+        $filmDoc = $this->dbName . '.film';
 
+    }
+
+    /**
+     * 获取一条数据记录
+     */
+    public function getOneAction()
+    {
+        $this->__init();
+        $filmDoc = $this->dbName . '.film';
+
+        $filter = ['film_id'=>1];
+        $options = [
+            'projection' => ['_id' => 0],
+            'sort' => ['x' => -1],
+        ];
+        $data = $this->mongo->findAll($filmDoc, $filter, $options);
+
+        $this->getView()->assign('data', $data);
+        $this->_view->assign('index.html');
     }
 
     /**
