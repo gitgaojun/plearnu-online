@@ -64,4 +64,18 @@ class mongo
         return $cursor;
     }
 
+    /**
+     * 执行查询语句
+     * @param $dbName
+     * @param $filter
+     * @param $options
+     * @return mixed
+     */
+    public function query($dbName, $filter, $options)
+    {
+        $query = new Query($filter, $options);
+        $cursor = static::$link->executeQuery($dbName, $query);
+        return $cursor = $cursor->toArray();
+    }
+
 }

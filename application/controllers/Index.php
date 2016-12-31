@@ -20,21 +20,28 @@ class IndexController extends Controller_Abstract
         $this->__init();
         $filmDoc = $this->dbName . '.film';
 
-        $filter = ['film_id'=>1];
-        $options = [
-            'projection' => ['_id' => 0],
-            'sort' => ['x' => -1],
-        ];
-        $data = $this->mongo->findAll($filmDoc, $filter, $options);
+        $filter = [];
+        $options = [];
+        $data = $this->mongo->query($filmDoc, $filter, $options);
 
         $this->getView()->assign('data', $data);
         $this->_view->assign('index.html');
     }
 
+    /**
+     * 获取所有的数据
+     */
     public function getAllAction()
     {
         $this->__init();
         $filmDoc = $this->dbName . '.film';
+
+        $filter = [];
+        $options = [];
+        $data = $this->mongo->query($filmDoc, $filter, $options);
+
+        $this->getView()->assign('data', $data);
+        $this->_view->assign('test.html');
 
     }
 
@@ -54,7 +61,7 @@ class IndexController extends Controller_Abstract
         $data = $this->mongo->findAll($filmDoc, $filter, $options);
 
         $this->getView()->assign('data', $data);
-        $this->_view->assign('index.html');
+        $this->_view->assign('test.html');
     }
 
     /**

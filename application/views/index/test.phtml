@@ -1,0 +1,25 @@
+<html>
+<head>
+    <meta>
+    <style>
+        body {
+            font: normal 100% Helvetica, Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div style="width:100%;">
+        <?php foreach($data as $k => $v) { ?>
+            <div style="width:100%;">
+                <img style="width:100%;" src="<?php print_r($v->{'film_img'}); ?>" />
+            </div>
+            <div>
+                <span style="font-size:3.2em;"><?php echo print_r($v->{'film_sort_desc'}); ?></span>
+            </div>
+
+        <?php } ?>
+
+
+    </div>
+</body>
+</html>
