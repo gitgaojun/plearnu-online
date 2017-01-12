@@ -81,7 +81,6 @@ class mongo
     public function query($dbName, $filter, $options)
     {
         $query = new Query($filter, $options);
-        var_dump(static::$link);exit;
         $cursor = static::$link->executeQuery($dbName, $query);
         return $cursor = $cursor->toArray();
     }
