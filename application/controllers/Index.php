@@ -11,7 +11,7 @@ class IndexController extends Controller_Abstract
 
     public function __init()
     {
-        $this->mongo = new mongo(MONGO_HOST, MONGO_PORT);
+        $this->mongo = new mongo(MONGO_HOST, MONGO_PORT, MONGO_USER, MONGO_PWD, MONGO_DB_NAME);
         $this->dbName = MONGO_DB_NAME;
     }
 
@@ -66,6 +66,7 @@ class IndexController extends Controller_Abstract
 
     /**
      * 插入基础数据，前期开发使用
+     * @link http://www.yaf3.local/index/addBase
      */
     public function addBaseAction()
     {

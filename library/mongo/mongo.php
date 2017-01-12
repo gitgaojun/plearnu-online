@@ -22,13 +22,19 @@ class mongo
 
     private $host; // host 地址
     private $port; // 端口号
+    private $dbUser; // user
+    private $dbPwd; // pwd
+    private $dbName;
     static public $link; // 链接资源
 
-    public function __construct( $host, $port )
+    public function __construct( $host, $port, $dbUser, $dbPwd, $dbName)
     {
         $this->host = $host;
         $this->port = $port;
-        static::$link = new Manager("mongodb://".$this->host.":".$this->port);
+        $this->dbUser = $dbUser;
+        $this->dbPwd = $dbPwd;
+        $this->dbName = $dbName;
+        static::$link = new Manager("mongodb://{$this->dbUser}:{$this->dbPwd}@".$this->host.":".$this->port.'/'.$this->dbName);
         return static::$link;
     }
 
@@ -42,6 +48,7 @@ class mongo
     {
         $bulk = new BulkWrite;
         $bulk->insert($json);
+//        var_dump( $json);exit;
         $writeResult = static::$link->executeBulkWrite($dbName, $json);
         return $writeResult->getInsertedCount();
     }
@@ -74,6 +81,7 @@ class mongo
     public function query($dbName, $filter, $options)
     {
         $query = new Query($filter, $options);
+        var_dump(static::$link);exit;
         $cursor = static::$link->executeQuery($dbName, $query);
         return $cursor = $cursor->toArray();
     }
