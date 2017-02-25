@@ -1,29 +1,26 @@
-#!/usr/bin/python
+#!/usr/bin/python2.7
 
-# 捕获html数据
-
-import urllib.request
-
+import urllib
+import urllib2
 import re
 
-def getHtmlByUrl(url):
-    page = urllib.request.urlopen(url);
-    html = page.read();
-    return html;
-
-def saveImg(html):
-    matchString = e.'img';
-    patter = re.compile(matchString);
-    imgList = patter.match(html);
-    for imgUrl in imgList:
-        urllib.request.urlretrieve(imgUrl);
-
-
-html = getHtmlByUrl('https://www.douban.com/search?q=%E6%AD%A3%E9%98%B3%E9%97%A8%E4%B8%8B');
-
-print(saveImg(html));
-
-
-# 先 利用 url 获取页面内容，
-# 再利用正则，匹配出需要的数据，利用 urllib urlopen urlretrieve  打开 获取资源下载到本地
-# re 正则对象 
+page = 1
+url = 'http://www.qiushibaike.com/hot/page/' + str(page)
+user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
+headers = { 'User-Agent' : user_agent }
+try:
+    request = urllib2.Request(url,headers = headers)
+    response = urllib2.urlopen(request)
+    content = response.read().decode('utf-8')
+    pattern = re.compile('<div.*?author">.*?<a.*?<img.*?>(.*?)</a>.*?<div.*?'+
+                         'content">(.*?)<!--(.*?)-->.*?</div>(.*?)<div class="stats.*?class="number">(.*?)</i>',re.S)
+    items = re.findall(pattern,content)
+    for item in items:
+        haveImg = re.search("img",item[3])
+        if not haveImg:
+            print item[0],item[1],item[2],item[4]
+except urllib2.URLError, e:
+    if hasattr(e,"code"):
+        print e.code
+    if hasattr(e,"reason"):
+        print e.reason
