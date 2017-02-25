@@ -1,5 +1,6 @@
 <?php
 
+
 define('APPLICATION_PATH', dirname(__FILE__));
 //var_dump(new Yaf_Application('/data/www/php/yaf3/config/application.ini'));exit;
 $app = new Yaf\Application(APPLICATION_PATH . '/config/application.ini');
