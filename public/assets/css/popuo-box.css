@@ -488,7 +488,7 @@ button::-moz-focus-inner {
 .login input[type="text"],.login input[type="password"]{
 	width:90%;
 	padding:5px;
-	margin:3px 0;x
+	margin:3px 0;
 	border: 1px solid #a63d56;
 	outline: none !important;
 }
@@ -501,7 +501,7 @@ button::-moz-focus-inner {
 	background: #EBEBEB;
 	border: solid 1px #222;
 }
-.signup input.email[type="text"],.signup input[type="password"]{
+.signup input.email[type="text"],.signup input[type="password"],.signup input.mobile[type="text"]{
   width: 90%;
   padding: 10px;
   background: #FFF;
@@ -511,7 +511,7 @@ button::-moz-focus-inner {
   color: #817F7F;
   border: solid 1px #817F7F;
 }
-.login input[type="submit"],.signup input[type="submit"]{
+.login input[type="submit"],.signup input[type="submit"],.signup button[type="button"]{
     border: 0px;
     padding: .5em 2em;
     background: #21DEEF;

@@ -19,23 +19,21 @@ namespace models\mysql;
  */
 class ModelBase
 {
-    private static $link;
+    private static $instance=null;
 
-    public function __construct( $configArray=array() )
+    private function __construct( $configArray=array() )
     {
-        if ( empty($configArray) ) {
-            $configArray = \Yaf\Application::app()->getConfig()->yaf;
-        }
-        return self::$link = self::connection($configArray['mysql_host'], $configArray['mysql_user'], $configArray['mysql_password'], $configArray['mysql_db']);
+        $configArray = \Yaf\Application::app()->getConfig()->yaf;
+        return new \PDO("mysql:host={$configArray['mysql_host']};dbname={$configArray['mysql_db']}", $configArray['mysql_user'], $configArray['mysql_password']);
     }
 
-    protected static function connection($host='', $user='', $password='', $db='')
+    public static function getInstance()
     {
-        if(!self::$link) {
-            self::$link = new \PDO("mysql:host={$host};dbname={$db}", $user, $password);
+        if(!self::$instance) {
+            self::$instance = new self;
         }
 
-        return self::$link ;
+        return self::$instance ;
 
     }
 
@@ -53,13 +51,19 @@ class ModelBase
             throw new \Exception('this sql is not null');
         }
 
-        if($result = self::$link->query($sql) === false) {
-            var_dump(self::$link->errorInfo());exit;
+        $result = array();
+        if(($pdoObj = self::$instance->query($sql)) === false) {
+            var_dump(self::$instance->errorInfo());exit;
+        }else{
+            $i=1;
+            foreach(self::$instance->query($sql) as $k => $v){
+                ++$i;
+                if($i === 2) {
+                    $result = $v;
+                    return $result;
+                }
+            }
         }
-        if($result===false){
-            $result = array();
-        }
-
         return $result;
     }
 
