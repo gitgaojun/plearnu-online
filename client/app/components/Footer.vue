@@ -1,5 +1,5 @@
 <template>
-  <footer v-show=" ! loading">
+  <footer v-show=" ! loading" >
     <div class="wrap">
       <div class="sub-links">
         <a v-if="auth" :href="settings" class="login-btn">{{ lang('settings') }}</a>
