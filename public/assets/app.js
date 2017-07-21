@@ -1920,7 +1920,7 @@ webpackJsonp([0],[
 	  }, [_c('div', {
 	    staticClass: "wrap"
 	  }, [_vm._m(0), _vm._v(" "), _c('a', {
-	    staticClass: "icon-github",
+	    staticClass: "icon-gaithub",
 	    attrs: {
 	      "href": "https://github.com/devfake/flox",
 	      "target": "_blank"
@@ -1952,7 +1952,7 @@ webpackJsonp([0],[
 	      "target": "_blank"
 	    }
 	  }, [_c('i', {
-	    staticClass: "icon-tmdb"
+	    staticClass: "icona-tmdb"
 	  })]), _vm._v("\n\n    ")])
 	}]}
 	if (false) {
