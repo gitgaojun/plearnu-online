@@ -1,6 +1,15 @@
 <template>
-  <footer v-show=" ! loading" >
+  <footer v-show=" ! loading">
     <div class="wrap">
+      <span class="attribution">
+        <a href="https://www.themoviedb.org/" target="_blank">
+          <i class="icon-tmdb"></i>
+        </a>
+        This sproduct uses the TMDb API but is not endorsed or certified by TMDb
+      </span>
+
+      <a class="icon-github" href="https://github.com/devfake/flox" target="_blank"></a>
+
       <div class="sub-links">
         <a v-if="auth" :href="settings" class="login-btn">{{ lang('settings') }}</a>
         <a v-if="auth" :href="logout" class="login-btn">{{ lang('logout') }}</a>
